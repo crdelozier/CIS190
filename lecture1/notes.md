@@ -232,6 +232,9 @@ int main(void) {
   * Stack allocation
   * Standards compliant code
 
+C-String
+-----------
+
 * There is no "String" data-type in C.  Instead, we use arrays of characters 
   to construct strings.
 
@@ -298,6 +301,8 @@ int main(){
   return 0;
 }
 ```
+C structs
+-----------
 
 * C also provides `structs` for grouping data-types together into a
   data structure.  However, since C is a procedural language and not an 
