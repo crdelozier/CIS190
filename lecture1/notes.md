@@ -177,60 +177,10 @@ int main(void) {
   which defines how floats are represented with bit strings as well as
   requirements on how operations over those floats should behave.
 
-* As you may have noticed, there is no similar type to Java's `boolean` in the
-  previous code sample.  C does not explicitly provide a boolean type, as shown 
-  in the following example ([bool.c](bool.c)):
-
 * Main takeaways from this example:
   * Basic data-types: ints and floats and chars
   * unsigned vs. signed and integer overflow
   * char is a byte
-  * No boolean in C
-
-* Like most languages, C also provides arrays.  In C, arrays can be either 
-  stack-allocated or heap-allocated.  In future sections, we'll cover the 
-  difference and trade-offs between these two types of arrays.  In this 
-  example, we examine how to declare a stack-allocated array in C.
-  [simple_arrays.c](simple_arrays.c).
-
-``` c
-#include <stdio.h>
-
-int main(void) {
-    int arr [] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
-    int i;
-    for (i = 0; i < 10; i++) {
-        printf("%d\n", arr[i]);
-    }
-    return 0;
-}
-```
-
-* If you are familiar with Java, you have a leg up here as it is a *C-like*
-  language.  Programming-in-the-small basics, e.g., variable declarations, basic
-  types, for-loops, and arrays, all transfer with some minor differences:
-
-  + The declaration of `arr` is the declaration of a *stack-allocated* array in
-    C.  In Java, you would flip the position of the brackets and write `int[]
-    arr = { 1, ..., 10 };`.  There is a subtle, yet very important distinction
-    here in that the Java array is (always) *heap-allocated* which we will visit
-    later in these notes.
-
-  + Note that we declare `i` on a line separate from the head of the `for` loop.
-    This is our first example of writing *safely standards compliant* code.  C
-    compilers typically support many different versions of the C language.
-    Typically the default compilation mode for most compilers is the *C89*
-    version of the spec which says that all local variables must be declared at
-    the top of the *scope blocks* they are declared in (i.e., each block
-    enclosed by curly braces).  To be safe, we respect this rule, but if you
-    know your compiler supports declaration of variable like in Java, e.g., C89
-    with GNU extensions (the gcc default) or later versions of the standard, you
-    can declare locals in the same places as you would in Java.
-
-* Main takeaways from this example:
-  * C array syntax
-  * Stack allocation
-  * Standards compliant code
 
 C-String
 -----------
@@ -301,70 +251,3 @@ int main(){
   return 0;
 }
 ```
-C structs
------------
-
-* C also provides `structs` for grouping data-types together into a
-  data structure.  However, since C is a procedural language and not an 
-  object-oriented language, these data structures do not have any methods 
-  associated with the data.  They are simply a convenient mechanism for 
-  grouping related pieces of data.  The following example demonstrates how
-  to declare and use structures. [structs.c](structs.c).
-
-```
-#include <stdio.h>
-
-struct point_t{
-    int x;
-    int y;
-};
-
-int main(void){
-    struct point_t p;
-    p.x = 1;
-    p.y = 2;
-
-    printf("(%d,%d)\n",p.x,p.y);
-
-    return 0;
-}
-```
-
-* In this example, we declare a point structure with two integers (an x and 
-  y coordinate).  This `struct` is simply a more convenient way to group 
-  pieces of data together.
-
-* As a matter of pragmatics, this bare `struct` definition is rarely what we
-  want.  The reason for this is that whenever we want to use this `struct`,
-  e.g., a local variable, we must qualify `point` with the `struct` keyword:
-  `struct point p`.  This is because the `struct` definition doesn't define a
-  type proper but a `struct`.
-
-* Main takeaway from this example:
-  * Struct syntax
-  * Not object-oriented - No methods
-
-* To define `point` as a type that we can use without qualification, we use
-  `typedef` to create an alias for `struct point`.  In general, `typedef`s have
-  the following form:
-
-``` c
-typedef int error_code;
-```
-
-* This example `typedef` defines `error_code` as an alias for `int`.  Therefore
-  `error_code` can be used where ever we expect an `int`.  This is useful as a
-  point of documentation to have an `error_code` type that is really an `int`.
-
-* We also use `typedef` to bring a `struct` into the type world.  For example,
-  in [point.h](src/point.h) we combine `typedef` and `struct` as follows:
-
-``` c
-typedef struct point {
-    int x;
-    int y;
-} point;
-```
-
-* While it looks redundant, this has the effect of making `point` an alias for
-  `struct point` which allows us to use `point` as a type throughout our code.
