@@ -12,8 +12,11 @@ int main() {
         printf("This statement should not print.\n");
     }
 
-    // TODO: Example of using some integers
-    // TODO: Print default values for True and False that the compiler uses
+    if(-500){
+      printf("This should also print\n");
+    }
+    
+    printf("True: %d, False: %d\n",1==1,1!=1);
 
     return 0;
 }

@@ -1,14 +1,14 @@
-#include <stdio.h>
+#include <cstdio>
 
 int main() {
-    int TRUE = 1;
-    int FALSE = 0;
+    bool TRUE = true;
+    bool FALSE = false;
 
-    if(TRUE){
+    if(true){
         printf("This statement should print!\n");
     }
 
-    if(FALSE){
+    if(false){
         printf("This statement should not print.\n");
     }
 
@@ -16,7 +16,7 @@ int main() {
         printf("This statement should also print!\n");
     }
 
-    printf("True: %d, False: %d\n",10 == 10, 2 == 5);
+    printf("True: %d, False: %d\n",true, false);
 
     return 0;
 }

@@ -13,6 +13,7 @@ int main(){
   x = y + 1;
 
   z = f(x);
+  y = f(x);
 
   return 0;
 }
