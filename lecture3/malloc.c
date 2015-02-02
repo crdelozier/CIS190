@@ -1,12 +1,18 @@
-#include <stdlib.h>
-#include <stdio.h>
-#include <assert.h>
+#include <cstdlib>
+#include <iostream>
+#include <cassert>
 
-int main(void){
-    int *p = (int*)malloc(sizeof(int));
-    assert(p != NULL);
-    int *a = (int*)malloc(10 * sizeof(int));
-    assert(a != NULL);
+// int *p; *p = 1;
+// void* malloc(size_t size);
+// void free(void *p);
+
+int main(){
+  //int *p = (int*)malloc(sizeof(int));
+  int *p = new int;
+    assert(p != nullptr);
+    //int *a = (int*)malloc(10 * sizeof(int));
+    int *a = new int[10];
+    assert(a != nullptr);
     int c = 0;
 
     for(c = 0; c < 10; c++){
@@ -17,7 +23,12 @@ int main(void){
         *p += a[c];
     }
 
-    printf("%d\n",*p);
+    std::cout << *p << "\n";
+
+    //free(p);
+    delete p;
+    //free(a);
+    delete [] a;
 
     return 0;
 }

@@ -8,6 +8,7 @@ int main(){
     *p1 = 1;
     *p2 = 2;
 
+    // int* = int*
     *ptp = p1;
     *ptp = p2;
     
