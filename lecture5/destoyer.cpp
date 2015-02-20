@@ -1,35 +1,46 @@
-class AutoDestroyer{
+#include <iostream>
+
+class auto_ptr{
     int *member;
+
 public:
-    AutoDestroyer(){
-        member = new int;
-    }
+  auto_ptr() : member(){
+    member = new int;
+    std::cout << "In constructor\n";
+  }
 
-    ~AutoDestroyer(){
-        delete member;
-    }
+  ~auto_ptr(){
+    delete member;
+    std::cout << "In destructor\n";
+  }
 
-    AutoDestroyer(AutoDestroyer &other){
-        member = new int;
-        
-    }
+  auto_ptr(auto_ptr &other){
+    member = new int;
+    *member = *(other.member);
+    std::cout << "In copy constructor\n";
+  }
 
-    AutoDestroyer& operator= (AutoDestroyer &other){
-        if (this != &other){
-            *member = *other.member;
-        }
-
-        return *this;
-    }
+  auto_ptr& operator= (auto_ptr &other){
+    std::cout << "In assignment\n";
+    if (this != &other){
+      *member = *other.member;
+    }  
+    return *this;
+  }
 };
 
+void f(auto_ptr p){
+  std::cout << "in f\n";
+}
+
 int main(){
-    AutoDestroyer ad1;
-    AutoDestroyer ad2;
+    auto_ptr ad1;
+    auto_ptr ad2;
 
-    AutoDestroyer adCopy(ad1);
-
+    auto_ptr adCopy(ad1);
     ad2 = ad1;
+
+    f(ad1);
 
     return 0;
 }
