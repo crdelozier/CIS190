@@ -10,13 +10,19 @@ public:
 // TODO: Inherit PokemonType from each of the sub-types 
 // so that we can use PokemonType* as a base type
 
-class NormalType{
+class NormalType : public PokemonType{
+public:
+  virtual int damageModifier(PokemonType *other);
 };
 
-class ElectricType{
+class ElectricType : public PokemonType{
+public:
+  virtual int damageModifier(PokemonType *other);
 };
 
-class WaterType{
+class WaterType : public PokemonType{
+public:
+  virtual int damageModifier(PokemonType *other);
 };
 
 }

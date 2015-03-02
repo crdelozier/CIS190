@@ -19,10 +19,24 @@ public:
   virtual void print() = 0;
 };
 
-class Pikachu{
+class Pikachu : private NormalType, private ElectricType,
+                public Pokemon {
+public:
+  Pikachu();
+  virtual ~Pikachu();
+
+  void takeDamage(Ability *attackedWith);
+  void print();
 };
 
-class Magikarp{
+class Magikarp : private NormalType, private WaterType,
+                 public Pokemon {
+public:
+  Magikarp();
+  virtual ~Magikarp();
+
+  void takeDamage(Ability *attackedWith);
+  void print();
 };
 
 }

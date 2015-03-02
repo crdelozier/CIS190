@@ -1,4 +1,4 @@
-CXXFLAGS=-std=c++11
+CXXFLAGS=-std=c++11 -g -Wall
 OBJS=bigint.o main.o
 
 all: $(OBJS)

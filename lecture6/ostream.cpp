@@ -7,7 +7,7 @@ void print(std::ostream &out){
 }
 
 int main(){
-  std::fstream file("output.txt", std::ios_base::out);
+  std::fstream file("output.txt", std::ios_base::out); // open("output.txt","w");
 
   print(file);
   print(std::cout);

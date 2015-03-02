@@ -11,7 +11,9 @@ int ElectricType::damageModifier(PokemonType *other){
 }
 
 int WaterType::damageModifier(PokemonType *other){
-  // TODO: Check for ElectricType for higher damage
+  if(dynamic_cast<ElectricType*>(other)){
+    return 2;
+  }
   return 1;
 }
 
