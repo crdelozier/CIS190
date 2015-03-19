@@ -21,8 +21,12 @@ int main(){
   y = arr[2];
   std::cout << *y << "\n";
 
-  array<int> arr3(5);
-  arr3.copyFrom(arr2);
+  //array<int> arr3(5);
+  //arr3.copyFrom(arr2);
+
+  for(auto it = arr.begin(), end = arr.end(); it != end; ++it){
+    std::cout << *it << "\n";
+  }
 
   return 0;
 }

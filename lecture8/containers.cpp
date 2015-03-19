@@ -5,11 +5,42 @@
 
 #include <iostream>
 
+class UnOptimized{
+public:
+  static const bool allowsOptimization = false;
+};
+
+class Optimized{
+public:
+  static const bool allowsOptimiziation = true;
+};
+
+template <bool optimize>
+void unoptimized(){
+  // Unoptimized version
+}
+
+template<>
+void unoptimized<true>{
+  // Optimized version
+}
+
+template <class Iterator>
+void print_helper(Iterator begin, Iterator end, bidirectional_iterator_tag t){
+
+}
+
+template <class Iterator>
+void print_helper(Iterator begin, Iterator end, random_access_iterator_tag t){
+
+}
+
 template <class Iterator>
 void print(Iterator begin, Iterator end){
   for(Iterator it = begin; it != end; it++){
     std::cout << *it << ",";
   }
+  print_helper(begin,end,Iterator::iterator_category);
   std::cout << "\n";
 }
 
@@ -28,7 +59,7 @@ int main(){
   v.resize(10);
 
   v[5] = 100;
-  
+
   print(v.begin(),v.end());
 
   l.push_front(2);
