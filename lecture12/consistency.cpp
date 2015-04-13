@@ -3,9 +3,9 @@
 
 #include "barrier.hpp"
 
-int A = 0;
-int D = 0;
-int C = 0;
+int X = 0;
+int Y = 0;
+int Z = 0;
 
 void thread1(barrier *bar){
   bar->wait();
