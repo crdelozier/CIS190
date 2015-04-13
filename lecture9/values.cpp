@@ -2,9 +2,11 @@ int foo(int val){
   return val;
 }
 
-int& bar(int &val){
+int& bar(int& val){
   return val;
 }
+
+
 
 int main(){
   int x,y;

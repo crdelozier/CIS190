@@ -38,6 +38,9 @@ public:
   }
 
 private:
+  unique_ptr(unique_ptr<T>& other) = delete;
+  unique_ptr<T>& operator=(unique_ptr<T>& other) = delete;
+  
   // How can we prevent users from calling the copy constructor and assignment
   // operator with an lvalue?
 

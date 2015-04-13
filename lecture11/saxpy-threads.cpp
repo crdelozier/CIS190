@@ -4,12 +4,14 @@
 #include <iostream>
 #include <cstdlib>
 
-void saxpy(int start, int end, float a, float *x, float *y, int iters) {
+void saxpy(int tid, int start, int end, float a, float *x, float *y, int iters) {
+  std::cout << "Thread " << tid << " starting\n";
   for (int c = 0; c < iters; c++){
     for (int i = start; i < end; ++i){
       y[i] = a*x[i] + y[i];
     }
   }
+  std::cout << "Thread " << tid << " ending\n";
 }
 
 int main(int argc, char **argv){
@@ -38,11 +40,14 @@ int main(int argc, char **argv){
   int first = 0;
   int chunk = num / 4;
 
+  // template <Args... args>
+  // std::thread(Function&& f, Args... args){ f(args...); }
+
   for(int i = 0; i < 3; i++){
-    threads[i] = new std::thread(saxpy,first,first + chunk,5,x,y,iters);
+    threads[i] = new std::thread(saxpy,i,first,first + chunk,5,x,y,iters);
     first += chunk;
   }
-  threads[3] = new std::thread(saxpy,first,num,5,x,y,iters);
+  threads[3] = new std::thread(saxpy,3,first,num,5,x,y,iters);
 
   for(int i = 0; i < 4; i++){
     threads[i]->join();

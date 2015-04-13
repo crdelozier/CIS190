@@ -10,12 +10,15 @@ void typesafe_printf(const char *s){
   }
 }
 
-template<typename T, typename... Args>
+// template <int, typename... Args>
+template <typename T, typename... Args>
 void typesafe_printf(const char *s, T value, Args... args){
   while (*s) {
     if (*s == '%') {
       std::cout << value;
       s += 2;
+      // typesafe_printf<char,int>(s, 'a', args...);
+      // typesafe_printf<int>(s,3);
       typesafe_printf(s, args...);
       return;
     }

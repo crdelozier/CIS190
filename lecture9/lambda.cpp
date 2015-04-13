@@ -15,15 +15,18 @@ int main(){
 
   print(v.begin(),v.end());
 
-  //std::for_each(v.begin(),v.end(),[](int x) -> void { std::cout << x << ","; });
-  //std::cout << "\n";
+  std::for_each(v.begin(),v.end(),[](int& x) -> void { x = x * 2; });
+
+  // for_each(Iterator begin, Iterator end, UnaryFunction fn)
+  std::for_each(v.begin(),v.end(),[](int x) -> void { std::cout << x << ","; });
+  std::cout << "\n";
 
   int factor = 5;
-  auto sum = [&factor](int x, int y) -> int { return factor * (x + y); };
-
+  auto sum = [factor](int x, int y) -> int { return factor * (x + y); };
+ 
+  // accumulate(Iterator begin, Iterator end, T start_value, BinaryFunction fn)
   int total = std::accumulate(v.begin(), v.end(), 0, sum);
   std::cout << "Total: " << total << "\n";
-
 
   return 0;
 }

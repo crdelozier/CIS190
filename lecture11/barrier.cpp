@@ -10,8 +10,8 @@ public:
   barrier(int total) : _count(0), _total(total) {}
 
   void wait(){
-    //_count++;
-    //while(_count != _total){}
+    _count++;
+    while(_count != _total){}
   }
 };
 

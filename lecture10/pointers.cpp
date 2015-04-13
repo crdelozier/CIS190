@@ -3,16 +3,29 @@
 #include "shared_ptr.hpp"
 #include "intrusive_ptr.hpp"
 
-#define pointer_type auto_ptr
+#define pointer_type intrusive_ptr
+
+class PointMem{
+  int bits = 001;
+};
 
 class Point{
   int _x;
   int _y;
+  int *_count;
   
 public:
   Point() : _x(0), _y(0) {}
 
   Point(int x, int y) : _x(x), _y(y) {}
+
+  void increment(){
+    _count++;
+  }
+
+  int decrement(){
+    return --_count;
+  }
 };
 
 class Bad{
@@ -22,21 +35,27 @@ public:
   Bad(pointer_type<Point>& p) : _p(p) {}
 };
 
-pointer_type<Point> bar(pointer_type<Point> p){
-  return p;
+pointer_type<Point> bar(pointer_type<Point> p2){
+  return p2;
 }
 
-void f(pointer_type<Point> p1, pointer_type<Point> p2){
+void f(pointer_type<Point> p2, pointer_type<Point> p3){
   // Why can't we do this assignment with auto_ptr?
-  // p2 = bar(p1);
+  // p3 = bar(p2);
 }
 
 int main(){
+  // auto_ptr<Point> p1(new Point);
+  // Point *p1 = new Point;
   pointer_type<Point> p1(new Point);
   pointer_type<Point> p2(new Point);
   pointer_type<Point> p3(new Point);
 
+  float x = 1.0523523;
+
+  // p1 == nullptr
   pointer_type<Point> p4(p1);
+  // p4 == nullptr
   pointer_type<Point> p5 = p4;
 
   // What is safe to dereference here?

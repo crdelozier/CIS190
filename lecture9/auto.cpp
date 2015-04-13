@@ -6,8 +6,11 @@ double f(){
 
 int main(){
   int x = 5;
-  auto y = x;
-  auto z = f();
+  auto y = x; // int y = x;
+
+  /// CODE HERE
+
+  decltype(y) z = f(); // int z = f();
   // Some code in between
   auto result = y + z;
   std::cout << result << "\n";
