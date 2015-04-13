@@ -4,13 +4,11 @@
 template <class T>
 class intrusive_ptr{
   T *_p;
-  int *_count;
 
 public:
-  intrusive_ptr() : _p(nullptr), _count(nullptr) {}
+  intrusive_ptr() : _p(nullptr) {}
 
-  intrusive_ptr(T *p) : _p(p), _count(new int) {
-    *_count = 1;
+  intrusive_ptr(T *p) : _p(p) {
     std::cout << "Constructing " << (void*)_p << "\n";
   }
 
@@ -19,18 +17,17 @@ public:
       if(_p->decrement() == 0){
         std::cout << "Deleting " << (void*)_p << "\n";
         delete _p;
-        delete _count;
       }
     }
   }
 
-  intrusive_ptr(intrusive_ptr<T>& other) : _p(other._p), _count(other._count) {
+  intrusive_ptr(intrusive_ptr<T>& other) : _p(other._p) {
     if(_p != nullptr){
       _p->increment();
     }
   }
 
-  intrusive_ptr(intrusive_ptr<T>&& other) : _p(other._p), _count(other._count) {
+  intrusive_ptr(intrusive_ptr<T>&& other) : _p(other._p) {
     if(_p != nullptr){
       _p->increment();
     }
@@ -61,17 +58,11 @@ private:
     T *tmp = _p;
     _p = other._p;
     other._p = tmp;
-    int *tmpcount = _count;
-    _count = other._count;
-    other._count = tmpcount;
   }
 
   void swap(intrusive_ptr<T>&& other){
     T *tmp = _p;
     _p = other._p;
     other._p = tmp;
-    int *tmpcount = _count;
-    _count = other._count;
-    other._count = tmpcount;
   }
 };
