@@ -5,6 +5,7 @@
 
 int A = 0;
 int B = 0;
+int Z = 0;
 
 void thread1(barrier *bar){
   bar->wait();
